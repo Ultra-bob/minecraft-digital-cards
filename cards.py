@@ -1,5 +1,5 @@
-from classes import *
-from subclasses import *
+from classes import Card
+from subclasses import explodeCard, poisonCard
 
 class creeper(explodeCard):
   
@@ -12,19 +12,20 @@ class creeper(explodeCard):
 
 class zombie(Card):
 
-  #set stats
-  name = "zombie"
-  maxHealth = 200
-  attack = 40
-  healHp = 20
+	#set stats
+	name = "zombie"
+	maxHealth = 200
+	attack = 40
+	healHp = 20
 
-  def useAbility(self, other):
-	#if the other card is a zombie then double damage
-    a, b = field.getCard(team)
-	
-	if a.name and b.name == "zombie": other.damage(attack * 2)
+	def useAbility(self, other):
+		#if the other card is a zombie then double damage
+		a, b = self.field.getCard(self.team)
+		
+		if a.name and b.name == "zombie" :
+			other.damage(self.attack * 2)
 
-	self.turnActions()
+		self.turnActions()
 
 
 
@@ -58,7 +59,7 @@ class spider(Card):
 
 	def useAbility(self, other):
 		#? is this a good idea
-		a, b = field.getCard(team)
+		a, b = self.field.getCard(self.team)
 
 		if a.name != b.name and a.name or b.name == "skeleton":
 			other.damage(self.attack * 4)
@@ -75,8 +76,8 @@ class skeleton(Card):
 	dodging  = False
 
 	def damage(self, amount):
-		if not dodging: self.health -= amount
-		elif dodging: pass
+		if not self.dodging: self.health -= amount
+		elif self.dodging: pass
 
 
 	
